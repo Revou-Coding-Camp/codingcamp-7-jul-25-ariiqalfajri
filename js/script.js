@@ -1,49 +1,71 @@
-const form = document.getElementById('todo-form');
-const todoInput = document.getElementById('todo-input');
+const taskInput = document.getElementById('task-input');
 const dateInput = document.getElementById('date-input');
-const todoList = document.getElementById('todo-list');
-const filterDate = document.getElementById('filter-date');
+const addBtn = document.getElementById('add-btn');
+const filterBtn = document.getElementById('filter-btn');
+const deleteAllBtn = document.getElementById('delete-all-btn');
+const todoBody = document.getElementById('todo-body');
 
 let todos = [];
 
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const task = todoInput.value.trim();
+addBtn.addEventListener('click', () => {
+  const task = taskInput.value.trim();
   const date = dateInput.value;
 
   if (!task || !date) {
-    alert('Please fill in both fields.');
+    alert('Please enter both task and date.');
     return;
   }
 
-  const todo = { task, date };
-  todos.push(todo);
+  todos.push({ task, date, done: false });
   renderTodos();
-  form.reset();
+  taskInput.value = '';
+  dateInput.value = '';
 });
 
-filterDate.addEventListener('change', () => {
-  renderTodos();
+filterBtn.addEventListener('click', () => {
+  const filterDate = prompt('Enter date to filter (YYYY-MM-DD):');
+  if (filterDate) {
+    renderTodos(filterDate);
+  }
 });
 
-function renderTodos() {
-  todoList.innerHTML = '';
+deleteAllBtn.addEventListener('click', () => {
+  if (confirm('Are you sure you want to delete all tasks?')) {
+    todos = [];
+    renderTodos();
+  }
+});
 
-  const filtered = filterDate.value
-    ? todos.filter(todo => todo.date === filterDate.value)
+function renderTodos(filter = '') {
+  todoBody.innerHTML = '';
+
+  const filtered = filter
+    ? todos.filter(todo => todo.date === filter)
     : todos;
 
+  if (filtered.length === 0) {
+    todoBody.innerHTML = `<tr><td colspan="4" class="empty">No task found</td></tr>`;
+    return;
+  }
+
   filtered.forEach((todo, index) => {
-    const li = document.createElement('li');
-    li.innerHTML = `
-      <div>
-        <strong>${todo.task}</strong><br/>
-        <small>${todo.date}</small>
-      </div>
-      <button class="delete-btn" onclick="deleteTodo(${index})">Delete</button>
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${todo.task}</td>
+      <td>${todo.date}</td>
+      <td>${todo.done ? '✅ Done' : '⏳ Pending'}</td>
+      <td>
+        <button onclick="toggleStatus(${index})">Toggle</button>
+        <button onclick="deleteTodo(${index})">Delete</button>
+      </td>
     `;
-    todoList.appendChild(li);
+    todoBody.appendChild(row);
   });
+}
+
+function toggleStatus(index) {
+  todos[index].done = !todos[index].done;
+  renderTodos();
 }
 
 function deleteTodo(index) {
