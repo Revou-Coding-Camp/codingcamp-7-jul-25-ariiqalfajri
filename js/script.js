@@ -97,18 +97,19 @@ function renderTodos(filter = '') {
   filtered.forEach((todo, index) => {
     const row = document.createElement('tr');
     row.innerHTML = `
-      <td>${todo.task}</td>
-      <td>${todo.date}</td>
-      <td class="${todo.done ? 'status-done' : 'status-pending'}">
-        ${todo.done ? '✅ Done' : '⏳ Pending'}
-      </td>
-      <td>
-        <button onclick="toggleStatus(${index})">Toggle</button>
-        <button onclick="deleteTodo(${index})">Delete</button>
-      </td>
-    `;
+    <td>${todo.task}</td>
+    <td>${formatDate(todo.date)}</td>
+    <td class="${todo.done ? 'status-done' : 'status-pending'}">
+      ${todo.done ? '✅ Done' : '⏳ Pending'}
+    </td>
+    <td>
+      <button onclick="toggleStatus(${index})">Toggle</button>
+      <button onclick="deleteTodo(${index})">Delete</button>
+    </td>
+  `;
     todoBody.appendChild(row);
   });
+
 }
 
 function toggleStatus(index) {
