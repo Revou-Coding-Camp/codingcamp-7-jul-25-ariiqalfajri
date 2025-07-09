@@ -77,3 +77,13 @@ th, td {
   text-align: center;
   color: #ccc;
 }
+
+.status-done {
+  color: #2ecc71;
+  font-weight: bold;
+}
+
+.status-pending {
+  color: #e67e22;
+  font-weight: bold;
+}

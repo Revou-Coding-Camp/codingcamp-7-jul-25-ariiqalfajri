@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Todo List</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
+
 <body>
   <div class="container">
     <h1>Todo List</h1>
@@ -16,8 +18,8 @@
     </div>
 
     <div class="actions">
-      <button id="filter-btn">FILTER</button>
-      <button id="delete-all-btn">DELETE ALL</button>
+      <button type="button" id="filter-btn">FILTER</button>
+      <button type="button" id="delete-all-btn">DELETE ALL</button>
     </div>
 
     <table>
@@ -30,11 +32,14 @@
         </tr>
       </thead>
       <tbody id="todo-body">
-        <tr><td colspan="4" class="empty">No task found</td></tr>
+        <tr>
+          <td colspan="4" class="empty">No task found</td>
+        </tr>
       </tbody>
     </table>
   </div>
 
   <script src="js/script.js"></script>
 </body>
+
 </html>
