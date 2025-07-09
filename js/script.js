@@ -2,6 +2,7 @@ const taskInput = document.getElementById('task-input');
 const dateInput = document.getElementById('date-input');
 const addBtn = document.getElementById('add-btn');
 const filterBtn = document.getElementById('filter-btn');
+const clearFilterBtn = document.getElementById('clear-filter-btn');
 const deleteAllBtn = document.getElementById('delete-all-btn');
 const todoBody = document.getElementById('todo-body');
 
@@ -46,7 +47,6 @@ filterBtn.addEventListener('click', () => {
   if (filterDate) {
     renderTodos(filterDate);
   }
-  const clearFilterBtn = document.getElementById('clear-filter-btn');
   clearFilterBtn.addEventListener('click', () => {
     renderTodos();
   });
