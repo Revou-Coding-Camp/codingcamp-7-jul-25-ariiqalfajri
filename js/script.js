@@ -37,6 +37,7 @@ addBtn.addEventListener('click', () => {
 
   todos.push({ task, date, done: false });
   saveTodos();
+  
   renderTodos();
   taskInput.value = '';
   dateInput.value = '';
@@ -73,14 +74,10 @@ deleteAllBtn.addEventListener('click', () => {
   }
 });
 
-
-deleteAllBtn.addEventListener('click', () => {
-  if (confirm('Are you sure you want to delete all tasks?')) {
-    todos = [];
-    saveTodos();
-    renderTodos();
-  }
-});
+function formatDate(isoDateStr) {
+  const [yyyy, mm, dd] = isoDateStr.split('-');
+  return `${dd}-${mm}-${yyyy}`;
+}
 
 function renderTodos(filter = '') {
   todoBody.innerHTML = '';
