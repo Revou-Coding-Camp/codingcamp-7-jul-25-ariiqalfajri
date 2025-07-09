@@ -43,15 +43,36 @@ addBtn.addEventListener('click', () => {
 });
 
 filterBtn.addEventListener('click', () => {
-  const filterDate = prompt('Enter date to filter (YYYY-MM-DD):');
-  if (filterDate) {
-    renderTodos(filterDate);
-  }
-  clearFilterBtn.addEventListener('click', () => {
-    renderTodos();
-  });
+  const filterDate = prompt('Enter date to filter (dd-mm-yyyy):');
 
+  const dateRegex = /^\d{2}-\d{2}-\d{4}$/;
+  if (!filterDate || !dateRegex.test(filterDate)) {
+    alert('Please enter a valid date in format dd-mm-yyyy');
+    return;
+  }
+
+  const [dd, mm, yyyy] = filterDate.split('-');
+  const formatted = `${yyyy}-${mm}-${dd}`;
+
+  renderTodos(formatted);
+  document.getElementById('filter-info').textContent = `Showing tasks for ${filterDate}`;
 });
+
+
+clearFilterBtn.addEventListener('click', () => {
+  renderTodos();
+  document.getElementById('filter-info').textContent = '';
+});
+
+
+deleteAllBtn.addEventListener('click', () => {
+  if (confirm('Are you sure you want to delete all tasks?')) {
+    todos = [];
+    saveTodos();
+    renderTodos();
+  }
+});
+
 
 deleteAllBtn.addEventListener('click', () => {
   if (confirm('Are you sure you want to delete all tasks?')) {
