@@ -56,14 +56,14 @@ filterBtn.addEventListener('click', () => {
 
   renderTodos(formatted);
   document.getElementById('filter-info').textContent = `Showing tasks for ${filterDate}`;
+  document.getElementById('clear-filter-btn').style.display = 'inline-block';
 });
-
 
 clearFilterBtn.addEventListener('click', () => {
   renderTodos();
   document.getElementById('filter-info').textContent = '';
+  document.getElementById('clear-filter-btn').style.display = 'none';
 });
-
 
 deleteAllBtn.addEventListener('click', () => {
   if (confirm('Are you sure you want to delete all tasks?')) {
