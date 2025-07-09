@@ -22,15 +22,15 @@ function saveTodos() {
 addBtn.addEventListener('click', () => {
   const task = taskInput.value.trim();
   const date = dateInput.value;
-  const year = new Date(date).getFullYear();
-  if (year > 9999 || year < 1000) {
-    alert('Please enter a valid 4-digit year.');
-    return;
-  }
-
 
   if (!task || !task.replace(/\s/g, '') || !date) {
     alert('Please enter both task and date.');
+    return;
+  }
+
+  const year = new Date(date).getFullYear();
+  if (year > 9999 || year < 1000) {
+    alert('Please enter a valid 4-digit year.');
     return;
   }
 
@@ -46,6 +46,11 @@ filterBtn.addEventListener('click', () => {
   if (filterDate) {
     renderTodos(filterDate);
   }
+  const clearFilterBtn = document.getElementById('clear-filter-btn');
+  clearFilterBtn.addEventListener('click', () => {
+    renderTodos();
+  });
+
 });
 
 deleteAllBtn.addEventListener('click', () => {
